@@ -1,7 +1,7 @@
 {
   "name": "my-react-component",
   "version": "0.1.0",
-  "homepage": "/schema-ui/build/",
+  "homepage": "/cps/_static",
   "private": true,
   "dependencies": {
     "@stoplight/json-schema-viewer": "^4.16.0",
