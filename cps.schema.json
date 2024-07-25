@@ -38,7 +38,7 @@
       "$ref": "#/definitions/string_array_or_map_to_string_array"
     },
     "definitions": {
-      "description": "Specifies a list of compile definitions that must be defined when compiling code that consumes the component. Definitions should be in the form 'FOO' or 'FOO=BAR'. Additionally, a definition in the form '!FOO' indicates that the specified symbol (FOO, in this example) shall be explicitly undefined (e.g. _UFOO passed to the compiler). A map may be used instead to give different values depending on the language of the consuming source file. In this case, the build tool shall select the list from the map whose key matches the (case-insensitive) language of the source file being compiled. Recognized languages shall include 'C', 'C++', and 'Fortran'.",
+      "description": "Specifies a list of compile definitions that must be defined when compiling code that consumes the component. Definitions should be in the form `FOO` or `FOO=BAR`. Additionally, a definition in the form `!FOO` indicates that the specified symbol (FOO, in this example) shall be explicitly undefined (e.g. _UFOO passed to the compiler). A map may be used instead to give different values depending on the language of the consuming source file. In this case, the build tool shall select the list from the map whose key matches the (case-insensitive) language of the source file being compiled. Recognized languages shall include `C`, `C++`, and `Fortran`.",
       "$ref": "#/definitions/string_array_or_map_to_string_array"
     },
     "includes": {
@@ -54,7 +54,7 @@
       "$ref": "#/definitions/string_array"
     },
     "link_languages": {
-      "description": "Specifies the ABI language or languages of a static library (Type 'archive'). Officially supported (case-insensitive) values are 'C' (no special handling required) and 'C++' (consuming the static library also requires linking against the C++ standard runtime). The default is 'C'.",
+      "description": "Specifies the ABI language or languages of a static library (Type `archive`). Officially supported (case-insensitive) values are `C` (no special handling required) and `C++` (consuming the static library also requires linking against the C++ standard runtime). The default is `C`.",
       "$ref": "#/definitions/string_array",
       "default": [
         "C"
@@ -65,7 +65,7 @@
       "$ref": "#/definitions/string_array"
     },
     "link_location": {
-      "description": "Specifies an alternate location of the component that should be used when linking against the component. This attribute typically applies only to 'dylib' components on platforms where the library is separated into multiple file components. For example, on Windows, this attribute shall give the location of the .lib, while Location shall give the location of the .dll. If the path starts with @prefix@, the package's install prefix is substituted (see Package Searching). This is recommended, as it allows packages to be relocatable.",
+      "description": "Specifies an alternate location of the component that should be used when linking against the component. This attribute typically applies only to `dylib` components on platforms where the library is separated into multiple file components. For example, on Windows, this attribute shall give the location of the .lib, while Location shall give the location of the .dll. If the path starts with @prefix@, the package's install prefix is substituted (see Package Searching). This is recommended, as it allows packages to be relocatable.",
       "type": "string"
     },
     "link_requires": {
@@ -73,7 +73,7 @@
       "$ref": "#/definitions/string_array"
     },
     "location": {
-      "description": "Specifies the location of the component. The exact meaning of this attribute depends on the component type, but typically it provides the path to the component's primary artifact, such as a .so or .jar. (For Windows DLL components, this should be the location of the .dll. See also link_location.) If the path starts with @prefix@, the package's install prefix is substituted (see Package Searching). This is recommended, as it allows packages to be relocatable. This attribute is required for components that are not of 'interface' Type.",
+      "description": "Specifies the location of the component. The exact meaning of this attribute depends on the component type, but typically it provides the path to the component`s primary artifact, such as a .so or .jar. (For Windows DLL components, this should be the location of the .dll. See also link_location.) If the path starts with @prefix@, the package`s install prefix is substituted (see Package Searching). This is recommended, as it allows packages to be relocatable. This attribute is required for components that are not of `interface` Type.",
       "type": "string"
     },
     "requires": {
@@ -164,7 +164,7 @@
           "$ref": "#/definitions/requires"
         },
         "type": {
-          "description": "Specifies the type of a component. The component type affects how the component may be used. Officially supported values are 'executable' (any artifact which the target platform can directly execute), 'archive' (CABI static library), 'dylib' (CABI shared library), 'module' (CABI plugin library), 'jar' (Java Archive), 'interface' and 'symbolic'. If the type is not recognized by the parser, the component shall be ignored. (Parsers are permitted to support additional types as a conforming extension.)\n\nA 'dylib' is meant to be linked at compile time; the Location specifies the artifact required for such linking (i.e. the import library on PE platforms). A 'module' is meant to be loaded at run time with dlopen or similar; again, the Location specifies the appropriate artifact.\n\nAn 'interface' component is a special case; it may have the usual attributes of a component, but does not have a location. This can be used to create “virtual” components that do not have an associated artifact.\n\nA 'symbolic' component is even more special, as it has no (required) attributes at all, and the meaning of any attributes or configurations assigned to such a component is unspecified. A 'symbolic' component is intended to be used as a form of feature testing; a package that has a feature that is meaningful to users but does not otherwise map directly to a component may use a symbolic component to indicate availability of the feature to users.",
+          "description": "Specifies the type of a component. The component type affects how the component may be used. Officially supported values are `executable` (any artifact which the target platform can directly execute), `archive` (CABI static library), `dylib` (CABI shared library), `module` (CABI plugin library), `jar` (Java Archive), `interface` and `symbolic`. If the type is not recognized by the parser, the component shall be ignored. (Parsers are permitted to support additional types as a conforming extension.)\n\nA `dylib` is meant to be linked at compile time; the Location specifies the artifact required for such linking (i.e. the import library on PE platforms). A `module` is meant to be loaded at run time with dlopen or similar; again, the Location specifies the appropriate artifact.\n\nAn `interface` component is a special case; it may have the usual attributes of a component, but does not have a location. This can be used to create “virtual” components that do not have an associated artifact.\n\nA `symbolic` component is even more special, as it has no (required) attributes at all, and the meaning of any attributes or configurations assigned to such a component is unspecified. A `symbolic` component is intended to be used as a form of feature testing; a package that has a feature that is meaningful to users but does not otherwise map directly to a component may use a symbolic component to indicate availability of the feature to users.",
           "type": "string",
           "examples": [
             "executable",
@@ -192,11 +192,11 @@
       "additionalProperties": false
     },
     "platform": {
-      "description": "Specifies the platform on which a package's components may run. This allows tools to ignore packages which target a different platform than the platform that the consumer targets (see Package Searching). Any platform attribute not specified implies that the package's components are agnostic to that platform attribute. If this attribute is not specified, the package is implied to be platform agnostic. (This might be the case for a “library” which consists entirely of C/C++ headers. Note that JVM/CLR versions are platform attributes, so packages consisting entirely of Java and/or CLR components will still typically use this attribute.)",
+      "description": "Specifies the platform on which a package`s components may run. This allows tools to ignore packages which target a different platform than the platform that the consumer targets (see Package Searching). Any platform attribute not specified implies that the package`s components are agnostic to that platform attribute. If this attribute is not specified, the package is implied to be platform agnostic. (This might be the case for a “library” which consists entirely of C/C++ headers. Note that JVM/CLR versions are platform attributes, so packages consisting entirely of Java and/or CLR components will still typically use this attribute.)",
       "type": "object",
       "properties": {
         "c_runtime_vendor": {
-          "description": "Specifies that the package's CABI components require the specified C standard/runtime library. Typical (case-insensitive) values include 'bsd' (libc), 'gnu' (glibc), 'mingw' and 'microsoft'.",
+          "description": "Specifies that the package`s CABI components require the specified C standard/runtime library. Typical (case-insensitive) values include `bsd` (libc), `gnu` (glibc), `mingw` and `microsoft'.",
           "type": "string",
           "examples": [
             "bsd",
@@ -210,7 +210,7 @@
           "type": "string"
         },
         "clr_vendor": {
-          "description": "Specifies that the package's CLR (.NET) components require the specified Common Language Runtime vendor. Typical (case-insensitive) values include 'microsoft' and 'mono'.",
+          "description": "Specifies that the package`s CLR (.NET) components require the specified Common Language Runtime vendor. Typical (case-insensitive) values include `microsoft` and `mono'.",
           "type": "string",
           "examples": [
             "microsoft",
@@ -222,7 +222,7 @@
           "type": "string"
         },
         "cpp_runtime_vendor": {
-          "description": "Specifies that the package's CABI components require the specified C++ standard/runtime library. Typical (case-insensitive) values include 'gnu' (libstdc++), 'llvm' (libc++) and 'microsoft'.",
+          "description": "Specifies that the package`s CABI components require the specified C++ standard/runtime library. Typical (case-insensitive) values include `gnu` (libstdc++), `llvm` (libc++) and `microsoft'.",
           "type": "string",
           "examples": [
             "gnu",
@@ -239,7 +239,7 @@
           "type": "string"
         },
         "jvm_vendor": {
-          "description": "Specifies that the package's Java components require the specified Java vendor. Typical (case-insensitive) values include 'oracle' and 'openjdk'.",
+          "description": "Specifies that the package`s Java components require the specified Java vendor. Typical (case-insensitive) values include `oracle` and `openjdk'.",
           "type": "string",
           "examples": [
             "oracle",
@@ -251,7 +251,7 @@
           "type": "string"
         },
         "kernel": {
-          "description": "Specifies the name of the operating system kernel required by the package's components. The value is case insensitive and should follow the output of uname _s. Typical values include 'windows', 'cygwin', 'linux' and 'darwin'.",
+          "description": "Specifies the name of the operating system kernel required by the package`s components. The value is case insensitive and should follow the output of uname _s. Typical values include `windows`, `cygwin`, `linux` and `darwin'.",
           "type": "string",
           "examples": [
             "windows",
@@ -305,7 +305,7 @@
       "type": "string"
     },
     "version_schema": {
-      "description": "Specifies the structure to which the package's version numbering conforms. Tools may use this to determine how to perform version comparisons. Officially supported (case-insensitive) values are 'simple' and 'custom' ('rpm' or 'dpkg' should be used where applicable, but may not be supported by all tools). If a package uses 'custom', version numbers may be compared, but version ordering is not possible. The default is 'simple'.\n\nNeedless to say, changing a package's version scheme between releases is very strongly discouraged.\n\nNote that this attribute determines only how version numbers are ordered. It does not imply anything about the compatibility or incompatibility of various versions of a package. See also compat_version.\n\n    simple\n\n    The package's version number shall match the regular expression [0_9]+([.][0_9]+)*([_+].*)?.\n\n    The portion of the version which precedes the optional _ or + may be interpreted as a tuple of integers, in which leading zeros are ignored. Version numbers are compared according to numerical order, starting from the first (left_most) number of the tuples. If two version numbers have different tuple sizes, the shorter tuple shall be implicitly filled with zeros.\n",
+      "description": "Specifies the structure to which the package`s version numbering conforms. Tools may use this to determine how to perform version comparisons. Officially supported (case-insensitive) values are `simple` and `custom` (`rpm` or `dpkg` should be used where applicable, but may not be supported by all tools). If a package uses `custom`, version numbers may be compared, but version ordering is not possible. The default is `simple`.\n\nNeedless to say, changing a package`s version scheme between releases is very strongly discouraged.\n\nNote that this attribute determines only how version numbers are ordered. It does not imply anything about the compatibility or incompatibility of various versions of a package. See also compat_version.\n\n    simple\n\n    The package's version number shall match the regular expression [0_9]+([.][0_9]+)*([_+].*)?.\n\n    The portion of the version which precedes the optional _ or + may be interpreted as a tuple of integers, in which leading zeros are ignored. Version numbers are compared according to numerical order, starting from the first (left_most) number of the tuples. If two version numbers have different tuple sizes, the shorter tuple shall be implicitly filled with zeros.\n",
       "enum": [
         "simple",
         "custom",
